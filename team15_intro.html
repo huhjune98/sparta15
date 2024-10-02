@@ -42,19 +42,6 @@
             background-size: cover;
         }
 
-        .myheader {
-            background-color: greenyellow;
-            height: 50px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .myheader>button {
-            margin-right: 10px;
-        }
-
         .mycards {
             width: 500px;
             margin: 200px auto 0px 25%;
@@ -70,12 +57,36 @@
             width: 100%;
         }
 
-        .date_and_temperature {
-            height: 24px;
-        }
         .introduce {
-            position : relative;
+            position : relactive;
             margin: 0px auto;
+        }
+
+        .nav-item {
+            color : black;
+        }
+
+        .card_title {
+            position : relative;
+            top : 100px;
+            text-align: center;
+            font-size: 40px;
+
+            border: 5px double gray;
+            border-left-style: none;
+            border-right-style: none;
+            padding: 20px;
+        }
+
+        .postingbox_title {
+            text-align: center;
+        }
+
+        .how_to_post {
+            text-align: center;
+        }
+        .title_text {
+            font-size: 70px;
         }
 
     </style>
@@ -114,9 +125,11 @@
     </div>
     <div class="mytitle">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
-        <h1>15조 뉴비</h1>
+        <h1 class="title_text">15조 뉴비</h1>
+        <h5><span>5</span>명의 뉴비들이 열심히 구르는 중입니다...</h5>
     </div>
     <div class="introduce">
+        <h2 class="card_title">멤버 소개</h2>
         <div class="mycards">
             <div id="card" class="row row-cols-1 row-cols-md-1 g-4">
                 //1번 카드
@@ -212,6 +225,8 @@
             </div>
         </div>
         <div class="mypostingbox" id="postingbox">
+            <h3 class="postingbox_title">멤버 추가</h3>
+            <h6 class="how_to_post">정보를 입력하구 기록하기를 눌러주세요</h6>
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="image" placeholder="본인 사진" />
                 <label for="floatingInput">본인 사진</label>
