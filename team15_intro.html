@@ -109,6 +109,18 @@
             $('.details').toggle();
         }
 
+        //카드 입력창 초기화
+        function init_iput() {
+            $('#image').val("");
+            $('#name').val("");
+            $('#dicide').val("");
+            $('#date').val("");
+            $('#mbti').val("");
+            $('#hobby').val("");
+            $('#adv').val("");
+            $('#blog').val("");
+            $('#tmi').val("");
+        }
         //세부사항 입력창 열기
         function open_input() {
             $('#input_details').css("display", "block");
@@ -120,18 +132,21 @@
             $('#input_details').css("display", "none");
             $('#open_btn_details').css("display", "block");
             $('#close_btn_details').css("display", "none");
-            //세부사항 닫을 때 입력값 초기화
-            $('#mbti').val("");
-            $('#hobby').val("");
-            $('#adv').val("");
-            $('#blog').val("");
-            $('#tmi').val("");
         }
-        //카드 갯수를 세주는 변수
+        //입력창을 검정색으로 바꿔주는 함수
+        function change_black() {
+            $('#image').css("border-color", "black");
+            $('#image_label').css("color", "black");
+            $('#name').css("border-color", "black");
+            $('#name_label').css("color", "black");
+            $('#dicide').css("border-color", "black");
+            $('#dicide_label').css("color", "black");
+            $('#date').css("border-color", "black");
+            $('#date_label').css("color", "black");
+        }
+        //카드 갯수를 세주는 변수 
         let num = 5;
         function makecard() {
-            //카드 추가
-            num = num + 1;
             //input에서 정보 받아오기
             let image = $('#image').val();
             let name = $('#name').val();
@@ -144,10 +159,37 @@
             let blog = $('#blog').val();
             let tmi = $('#tmi').val();
 
+            //필수입력값을 검사하고 알려주기
+            if (image == "") {
+                alert("사진은 필수 입력항목입니다.");
+                change_black();
+                $('#image').css("border-color", "red");
+                $('#image_label').css("color", "red");
+                return;
+            } else if (name == "") {
+                alert("이름은 필수 입력항목입니다.");
+                change_black();
+                $('#name').css("border-color", "red");
+                $('#name_label').css("color", "red");
+                return;
+            } else if (dicide == "") {
+                alert("각오는 필수 입력항목입니다.");
+                change_black();
+                $('#dicide').css("border-color", "red");
+                $('#dicide_label').css("color", "red");
+                return;
+            } else if (date == "") {
+                alert("날짜는 필수 입력항목입니다.");
+                change_black();
+                $('#date').css("border-color", "red");
+                $('#date_label').css("color", "red");
+                return;
+            }
+
             //추가할 카드 html
             let temp_html = `
             <div class="member">
-                <h5 class="spot">▶ ${num}번 멤버</h5>
+                <h5 class="spot">▶ ${num + 1}번 멤버</h5>
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                     <div class="col-md-4">
@@ -175,15 +217,10 @@
             alert('15조의 팀원이 되신것을 환영합니다!');
 
             //입력값 초기화
-            $('#image').val("");
-            $('#name').val("");
-            $('#dicide').val("");
-            $('#date').val("");
-            $('#mbti').val("");
-            $('#hobby').val("");
-            $('#adv').val("");
-            $('#blog').val("");
-            $('#tmi').val("");
+            init_iput();
+            close_input();
+            //카드 추가
+            num = num + 1;
         }
     </script>
 </head>
@@ -356,19 +393,19 @@
             <h6 class="how_to_post">정보를 입력하구 기록하기를 눌러주세요</h6>
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="image" placeholder="본인 사진" />
-                <label for="floatingInput">본인 사진</label>
+                <label for="floatingInput" id="image_label">본인 사진</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="name" placeholder="본인 이름" />
-                <label for="floatingInput">본인 이름</label>
+                <label for="floatingInput" id="name_label">본인 이름</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="dicide" placeholder="각오 한마디" />
-                <label for="floatingInput">각오 한마디</label>
+                <label for="floatingInput" id="dicide_label">각오 한마디</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="date" placeholder="작성 날짜" />
-                <label for="floatingInput">작성 날짜</label>
+                <label for="floatingInput" id="date_label">작성 날짜</label>
             </div>
             <!-- 세부사항 추가 버튼 -->
             <button onclick="open_input()" type="button" class="btn btn-secondary" id="open_btn_details"
