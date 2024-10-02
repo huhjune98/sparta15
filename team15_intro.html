@@ -51,7 +51,7 @@
         }
 
         .details {
-            background-color: green;
+            background-color: transparent;
             display: none;
         }
 
@@ -105,8 +105,28 @@
     </style>
 
     <script>
-        function openclose() {
-            $('.details').toggle();
+        $(document).ready(function () {
+            let url = "http://spartacodingclub.shop/sparta_api/weather/seoul";
+            fetch(url).then(res => res.json()).then(data => {
+                let temp=data['temp'];
+                $('#cTemp').text(temp);
+            })
+        })
+
+        function openclose1() {
+            $('#det1').toggle();
+        }
+        function openclose2() {
+            $('#det2').toggle();
+        }
+        function openclose3() {
+            $('#det3').toggle();
+        }
+        function openclose4() {
+            $('#det4').toggle();
+        }
+        function openclose5() {
+            $('#det5').toggle();
         }
 
         //카드 입력창 초기화
@@ -238,8 +258,9 @@
             </a>
 
             <ul class="nav nav-pills"> <!-- 날짜와 기온 태그 id는 따로 매겨주세요 -->
-                <li class="nav-item"><a class="nav-link">날짜: <span>0000.00.00.</span></a></li>
-                <li class="nav-item"><a class="nav-link">기온: <span>00도</span></a></li>
+                <li class="nav-item"><a class="nav-link">날짜: <time datetime="2024-10-02">2024년 10월 2일</time>
+                </a></li>
+                <li class="nav-item"><a class="nav-link">기온: <span id="cTemp">00</span>도</a></li>
             </ul>
         </header>
     </div>
@@ -257,7 +278,7 @@
                     <div class="row g-0" onclick=openclose()>
                         <div class="col-md-4">
                             <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fa676324e-0492-491d-8835-cb8c3809f5f7%2F%25E1%2584%258B%25E1%2585%25B5%25E1%2584%2589%25E1%2585%25A5%25E1%2584%258C%25E1%2585%25AE%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-8004-816f-ff268b801bf6&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=830&userId=&cache=v2"
-                                class="img-fluid rounded-start" alt="...">
+                                class="img-fluid rounded-start" alt="..." onclick=" openclose1()">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -267,7 +288,7 @@
                             </div>
                         </div>
                         <!-- 상세정보 -->
-                        <div class="details">
+                        <div class="details" id="det1">
                             <p>MBTI: INTJ</p>
                             <p>취미: 산책, 운동</p>
                             <p>장점: 성실합니다</p>
@@ -283,7 +304,7 @@
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fef4967d9-41f8-43e4-94a6-47f3223b327b%2F%25E1%2584%2592%25E1%2585%25A5%25E1%2584%258C%25E1%2585%25AE%25E1%2586%25AB.png?table=block&id=113f89f7-984e-8008-82f4-ef26e17f1522&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
-                                class="img-fluid rounded-start" alt="...">
+                                class="img-fluid rounded-start" alt="..." onclick=" openclose2()">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -293,10 +314,10 @@
                             </div>
                         </div>
                         <!-- 상세정보 -->
-                        <div class="details" id="det1">
+                        <div class="details" id="det2">
                             <p>MBTI: ISFJ</p>
                             <p>취미: 웨이트 트레이닝, 축구, 게임</p>
-                            <p>장점 사람들과 소통을 잘하는 편이다, 의견 조율을 잘 할 수있다, 한번 꽂히면 잘 파고든다</p>
+                            <p>장점: 사람들과 소통을 잘하는 편이다, 의견 조율을 잘 할 수있다, 한번 꽂히면 잘 파고든다</p>
                             <p>좋아하는것 :운동, 맛집 다니기, 드라이브</p>
                             <p>블로그: https://infobox4367.tistory.com</p>
                             <p>TMI: 3대 500 아직 멀었음</p>
@@ -310,7 +331,7 @@
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2F7087b6a6-8972-421c-b6f3-255b4c346748%2F%25E1%2584%2587%25E1%2585%25B5%25E1%2586%25BE%25E1%2584%2582%25E1%2585%25A1.jpg?table=block&id=113f89f7-984e-80b6-adaf-fc2aa12a4abb&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
-                                class="img-fluid rounded-start" alt="...">
+                                class="img-fluid rounded-start" alt="..." onclick=" openclose3()">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -320,7 +341,7 @@
                             </div>
                         </div>
                         <!-- 상세정보 -->
-                        <div class="details">
+                        <div class="details" id="det3">
                             <p>MBTI: INTJ</p>
                             <p>취미: 게임하기, 유튜브</p>
                             <p>좋아하는것: 누워있기</p>
@@ -336,7 +357,7 @@
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2F284a4896-5854-4aed-9a82-1ccd01530152%2F%25E1%2584%258C%25E1%2585%25A9%25E1%2584%2589%25E1%2585%25A5%25E1%2586%25BC%25E1%2584%2586%25E1%2585%25B5%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-80fb-9b87-fa08ab20f3a1&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
-                                class="img-fluid rounded-start" alt="...">
+                                class="img-fluid rounded-start" alt="..." onclick=" openclose4()">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -347,7 +368,7 @@
                             </div>
                         </div>
                         <!-- 상세정보 -->
-                        <div class="details">
+                        <div class="details" id="det4">
                             <p>MBTI:INTP</p>
                             <p>취미:게임, 여행</p>
                             <p>좋아하는것: 게임 </p>
@@ -364,7 +385,7 @@
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fd8e2380e-afa7-43ea-8a83-3fcfa6311da9%2F%25E1%2584%258C%25E1%2585%25A1%25E1%2586%25BC%25E1%2584%2589%25E1%2585%25AE%25E1%2584%258B%25E1%2585%25A7%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-807b-8fbf-ec897f9229f8&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
-                                class="img-fluid rounded-start" alt="...">
+                                class="img-fluid rounded-start" alt="..." onclick=" openclose5()">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -374,7 +395,7 @@
                             </div>
                         </div>
                         <!-- 상세정보 -->
-                        <div class="details">
+                        <div class="details" id="det5">
                             <p>MBTI: ESTJ</p>
                             <p>취미: 운동하기, 필름카메라, 뜨개질</p>
                             <p>좋아하는 것: 맛집 가기, 안 해본 활동 해보기</p>
