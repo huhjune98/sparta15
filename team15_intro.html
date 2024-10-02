@@ -105,20 +105,27 @@
     </style>
 
     <script>
-       
-        function openclose1(){
+        $(document).ready(function () {
+            let url = "http://spartacodingclub.shop/sparta_api/weather/seoul";
+            fetch(url).then(res => res.json()).then(data => {
+                let temp=data['temp'];
+                $('#cTemp').text(temp);
+            })
+        })
+
+        function openclose1() {
             $('#det1').toggle();
         }
-        function openclose2(){
+        function openclose2() {
             $('#det2').toggle();
         }
-        function openclose3(){
+        function openclose3() {
             $('#det3').toggle();
         }
-        function openclose4(){
+        function openclose4() {
             $('#det4').toggle();
         }
-        function openclose5(){
+        function openclose5() {
             $('#det5').toggle();
         }
 
@@ -214,8 +221,9 @@
             </a>
 
             <ul class="nav nav-pills"> <!-- 날짜와 기온 태그 id는 따로 매겨주세요 -->
-                <li class="nav-item"><a class="nav-link">날짜: <span>0000.00.00.</span></a></li>
-                <li class="nav-item"><a class="nav-link">기온: <span>00도</span></a></li>
+                <li class="nav-item"><a class="nav-link">날짜: <time datetime="2024-10-02">2024년 10월 2일</time>
+                </a></li>
+                <li class="nav-item"><a class="nav-link">기온: <span id="cTemp">00</span>도</a></li>
             </ul>
         </header>
     </div>
@@ -272,7 +280,7 @@
                         <div class="details" id="det2">
                             <p>MBTI: ISFJ</p>
                             <p>취미: 웨이트 트레이닝, 축구, 게임</p>
-                            <p>장점 사람들과 소통을 잘하는 편이다, 의견 조율을 잘 할 수있다, 한번 꽂히면 잘 파고든다</p>
+                            <p>장점: 사람들과 소통을 잘하는 편이다, 의견 조율을 잘 할 수있다, 한번 꽂히면 잘 파고든다</p>
                             <p>좋아하는것 :운동, 맛집 다니기, 드라이브</p>
                             <p>블로그: https://infobox4367.tistory.com</p>
                             <p>TMI: 3대 500 아직 멀었음</p>
