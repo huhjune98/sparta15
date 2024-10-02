@@ -11,18 +11,22 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 
         * {
             font-family: "Jua", sans-serif;
         }
 
         .mypostingbox {
-            width: 95%;
-            margin: 20px auto 20px auto;
+            width: 500px;
+            margin-left: 50px;
+            margin-top: 200px;
 
-            border: 1px solid gray;
+            border: 1px solid lightgray;
             padding: 20px;
             border-radius: 5px;
+            float: left;
         }
 
         .mytitle {
@@ -40,173 +44,431 @@
             background-size: cover;
         }
 
-        .myheader {
-            background-color: greenyellow;
-            height: 50px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .myheader>button {
-            margin-right: 10px;
-        }
-
         .mycards {
-            width: 500px;
-            margin: 30px auto 0px auto;
+            width: 600px;
+            margin: 200px auto 0px 20%;
+            float: left;
         }
 
         .details {
-            background-color: green;
+            background-color: transparent;
             display: none;
+            
+            padding-top: 10px;
+            padding-left: 10px;
+            border: 1px dashed lightgray;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            
         }
 
         .mypostingbox>button {
             width: 100%;
         }
+
+        .introduce {
+            position: relactive;
+            margin: 0px auto 0px auto;
+        }
+
+        .nav-item {
+            color: black;
+        }
+
+        .card_title {
+            position: relative;
+            top: 100px;
+            text-align: center;
+            font-size: 40px;
+
+            border: 5px double gray;
+            border-left-style: none;
+            border-right-style: none;
+            padding: 20px;
+        }
+
+        .postingbox_title {
+            text-align: center;
+        }
+
+        .how_to_post {
+            text-align: center;
+        }
+
+        .title_text {
+            font-size: 70px;
+        }
+
+        .card-date {
+            margin-top: auto;
+        }
+
+        .spot {
+            background-image: url('https://img.freepik.com/premium-vector/abstract-geometric-background-presentation_626925-936.jpg?semt=ais_hybrid');
+            background-position: bottom;
+            background-size: cover;
+            padding: 5px;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
     </style>
 
     <script>
-        function openclose() {
-            $('#postingbox').toggle();
+        $(document).ready(function () {
+            let url = "http://spartacodingclub.shop/sparta_api/weather/seoul";
+            fetch(url).then(res => res.json()).then(data => {
+                let temp=data['temp'];
+                $('#cTemp').text(temp);
+            })
+        })
+
+        function openclose1() {
+            $('#det1').toggle();
+            let arrow = $('#arrow1').text();
+            if (arrow.includes('▶')) {
+                $('#arrow1').text(arrow.replace('▶', '▼'));
+            } else {
+                $('#arrow1').text(arrow.replace('▼', '▶'));
+            }
         }
+        function openclose2() {
+            $('#det2').toggle();
+            let arrow = $('#arrow2').text();
+            if (arrow.includes('▶')) {
+                $('#arrow2').text(arrow.replace('▶', '▼'));
+            } else {
+                $('#arrow2').text(arrow.replace('▼', '▶'));
+            }
+        }
+        function openclose3() {
+            $('#det3').toggle();
+            let arrow = $('#arrow3').text();
+            if (arrow.includes('▶')) {
+                $('#arrow3').text(arrow.replace('▶', '▼'));
+            } else {
+                $('#arrow3').text(arrow.replace('▼', '▶'));
+            }
+        }
+        function openclose4() {
+            $('#det4').toggle();
+            let arrow = $('#arrow4').text();
+            if (arrow.includes('▶')) {
+                $('#arrow4').text(arrow.replace('▶', '▼'));
+            } else {
+                $('#arrow4').text(arrow.replace('▼', '▶'));
+            }
+        }
+        function openclose5() {
+            $('#det5').toggle();
+            let arrow = $('#arrow5').text();
+            if (arrow.includes('▶')) {
+                $('#arrow5').text(arrow.replace('▶', '▼'));
+            } else {
+                $('#arrow5').text(arrow.replace('▼', '▶'));
+            }
+        }
+
+        //세부사항 입력창 열기
+        function open_input() {
+            $('#input_details').css("display", "block");
+            $('#open_btn_details').css("display", "none");
+            $('#close_btn_details').css("display", "block");
+        }
+        //세부사항 입력창 닫기
+        function close_input() {
+            $('#input_details').css("display", "none");
+            $('#open_btn_details').css("display", "block");
+            $('#close_btn_details').css("display", "none");
+            //세부사항 닫을 때 입력값 초기화
+            $('#mbti').val("");
+            $('#hobby').val("");
+            $('#adv').val("");
+            $('#blog').val("");
+            $('#tmi').val("");
+        }
+        //카드 갯수를 세주는 변수
+        let num = 5;
         function makecard() {
-            
+            //카드 추가
+            num = num + 1;
+            //input에서 정보 받아오기
+            let image = $('#image').val();
+            let name = $('#name').val();
+            let dicide = $('#dicide').val();
+            let date = $('#date').val();
 
+            let mbti = $('#mbti').val();
+            let hobby = $('#hobby').val();
+            let adv = $('#adv').val();
+            let blog = $('#blog').val();
+            let tmi = $('#tmi').val();
+
+            //추가할 카드 html
+            let temp_html = `
+            <div class="member">
+                <h5 class="spot">▶ ${num}번 멤버</h5>
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="${image}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">${name}</h5>
+                            <p class="card-text">${dicide}</p>
+                            <p class="card-text card-date"><small class="text-body-secondary">${date}</small></p>
+                        </div>
+                    </div>
+                    <!-- 상세정보 -->
+                    <div class="details">
+                        <p>MBTI: ${mbti}</p>
+                        <p>취미: ${hobby}</p>
+                        <p>장점: ${adv}</p>
+                        <p>블로그: ${blog}</p>
+                        <p>TMI: ${tmi}</p>
+                    </div>
+                </div>
+            </div> 
+            </div>`;
+            $('.mycards').append(temp_html);
             alert('15조의 팀원이 되신것을 환영합니다!');
-        }
 
+            //입력값 초기화
+            $('#image').val("");
+            $('#name').val("");
+            $('#dicide').val("");
+            $('#date').val("");
+            $('#mbti').val("");
+            $('#hobby').val("");
+            $('#adv').val("");
+            $('#blog').val("");
+            $('#tmi').val("");
+        }
     </script>
 </head>
 
 <body>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand text-dark" href="#">
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV3p104WOFsYZFjQrjJWM3FG8FAs_CaipRgg&s"
-                    alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                15조(뉴비) 팀원 소개
+                    alt="Logo" width="30" height="24" class="d-inline-block align-text-top"><span class="fs-4">15조 팀원
+                    소개</span>
             </a>
-        </div>
-    </nav>
+
+            <ul class="nav nav-pills"> <!-- 날짜와 기온 태그 id는 따로 매겨주세요 -->
+                <li class="nav-item"><a class="nav-link">날짜: <time datetime="2024-10-02">2024년 10월 2일</time>
+                </a></li>
+                <li class="nav-item"><a class="nav-link">기온: <span id="cTemp">00</span>도</a></li>
+            </ul>
+        </header>
+    </div>
     <div class="mytitle">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
-        <h1>15조 자기소개</h1>
-        <h3>맴버 소개</h3>
-        <button onclick="openclose()" class="btn btn-primary" type="button">맴버 추가</button>
+        <h1 class="title_text">15조 뉴비</h1>
+        <h5><span>5</span>명의 뉴비들이 열심히 구르는 중입니다...</h5>
     </div>
-    <div class="mypostingbox" id="postingbox">
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="image" placeholder="본인 사진" />
-            <label for="floatingInput">본인 사진</label>
+    <div class="introduce">
+        <h2 class="card_title">멤버 소개</h2>
+        <div class="mycards">
+            <div class="member">
+                <h5 class="spot" id="arrow1">▶ 1번 멤버</h5>
+                <div class="card mb-3">
+                    <div class="row g-0" onclick=openclose()>
+                        <div class="col-md-4">
+                            <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fa676324e-0492-491d-8835-cb8c3809f5f7%2F%25E1%2584%258B%25E1%2585%25B5%25E1%2584%2589%25E1%2585%25A5%25E1%2584%258C%25E1%2585%25AE%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-8004-816f-ff268b801bf6&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=830&userId=&cache=v2"
+                                class="img-fluid rounded-start" alt="..." onclick=" openclose1()">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">이서준</h5>
+                                <p class="card-text">4개월 간 좋은 공부 습관을 가지고 한 단계 성장할 수 있는 시간을 보내겠습니다.</p>
+                                <p class="card-text card-date"><small class="text-body-secondary">2024.10.01</small></p>
+                            </div>
+                        </div>
+                        <!-- 상세정보 -->
+                        <div class="details" id="det1">
+                            <p>MBTI: INTJ</p>
+                            <p>취미: 산책, 운동</p>
+                            <p>장점: 성실합니다</p>
+                            <p>블로그: https://infobox4367.tistory.com</p>
+                            <p>TMI: 열심히 다이어트 중!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="member">
+                <h5 class="spot" id="arrow2">▶ 2번 멤버</h5>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fef4967d9-41f8-43e4-94a6-47f3223b327b%2F%25E1%2584%2592%25E1%2585%25A5%25E1%2584%258C%25E1%2585%25AE%25E1%2586%25AB.png?table=block&id=113f89f7-984e-8008-82f4-ef26e17f1522&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
+                                class="img-fluid rounded-start" alt="..." onclick=" openclose2()">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">허준</h5>
+                                <p class="card-text">끝까지 지치지 않고 잘 끝맺을 수 있으면 좋을 것 같습니다.</p>
+                                <p class="card-text card-date"><small class="text-body-secondary">2024.10.01</small></p>
+                            </div>
+                        </div>
+                        <!-- 상세정보 -->
+                        <div class="details" id="det2">
+                            <p>MBTI: ISFJ</p>
+                            <p>취미: 웨이트 트레이닝, 축구, 게임</p>
+                            <p>장점: 사람들과 소통을 잘하는 편이다, 의견 조율을 잘 할 수있다, 한번 꽂히면 잘 파고든다</p>
+                            <p>좋아하는것 :운동, 맛집 다니기, 드라이브</p>
+                            <p>블로그: https://infobox4367.tistory.com</p>
+                            <p>TMI: 3대 500 아직 멀었음</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="member">
+                <h5 class="spot" id="arrow3">▶ 3번 멤버</h5>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2F7087b6a6-8972-421c-b6f3-255b4c346748%2F%25E1%2584%2587%25E1%2585%25B5%25E1%2586%25BE%25E1%2584%2582%25E1%2585%25A1.jpg?table=block&id=113f89f7-984e-80b6-adaf-fc2aa12a4abb&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
+                                class="img-fluid rounded-start" alt="..." onclick=" openclose3()">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">이빛나</h5>
+                                <p class="card-text">다들 4개월동안 힘내서 완주해요!</p>
+                                <p class="card-text card-date"><small class="text-body-secondary">2024.10.01</small></p>
+                            </div>
+                        </div>
+                        <!-- 상세정보 -->
+                        <div class="details" id="det3">
+                            <p>MBTI: INTJ</p>
+                            <p>취미: 게임하기, 유튜브</p>
+                            <p>좋아하는것: 누워있기</p>
+                            <p>블로그: https://shinelee26.tistory.com/</p>
+                            <p>TMI: 동물 좋아해요</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="member">
+                <h5 class="spot" id="arrow4">▶ 4번 멤버</h5>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2F284a4896-5854-4aed-9a82-1ccd01530152%2F%25E1%2584%258C%25E1%2585%25A9%25E1%2584%2589%25E1%2585%25A5%25E1%2586%25BC%25E1%2584%2586%25E1%2585%25B5%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-80fb-9b87-fa08ab20f3a1&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
+                                class="img-fluid rounded-start" alt="..." onclick=" openclose4()">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">조성민</h5>
+                                <p class="card-text">함께 열심히 해봐요!</p>
+                                <p class="card-text card-date" card-date><small
+                                        class="text-body-secondary">2024.10.01</small></p>
+                            </div>
+                        </div>
+                        <!-- 상세정보 -->
+                        <div class="details" id="det4">
+                            <p>MBTI:INTP</p>
+                            <p>취미:게임, 여행</p>
+                            <p>좋아하는것: 게임 </p>
+                            <p>장점: 끈기</p>
+                            <p>블로그: https://tjdals9709.tistory.com/</p>
+                            <p>TMI: MBTI가 매번 바뀝니다</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="member">
+                <h5 class="spot" id="arrow5">▶ 5번 멤버</h5>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fd8e2380e-afa7-43ea-8a83-3fcfa6311da9%2F%25E1%2584%258C%25E1%2585%25A1%25E1%2586%25BC%25E1%2584%2589%25E1%2585%25AE%25E1%2584%258B%25E1%2585%25A7%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-807b-8fbf-ec897f9229f8&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
+                                class="img-fluid rounded-start" alt="..." onclick=" openclose5()">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">장수연</h5>
+                                <p class="card-text">끝까지 화이팅해봐요!</p>
+                                <p class="card-text card-date"><small class="text-body-secondary">2024.10.01</small></p>
+                            </div>
+                        </div>
+                        <!-- 상세정보 -->
+                        <div class="details" id="det5">
+                            <p>MBTI: ESTJ</p>
+                            <p>취미: 운동하기, 필름카메라, 뜨개질</p>
+                            <p>좋아하는 것: 맛집 가기, 안 해본 활동 해보기</p>
+                            <p>장점: 새로운 시도를 하는걸 두려워 하지 않는다</p>
+                            <p>블로그: https://suuuki.tistory.com/</p>
+                            <p>TMI: 지금 머리카락 초록색 아님</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="dicide" placeholder="각오 한마디" />
-            <label for="floatingInput">각오 한마디</label>
+
+        <!-- 멤버추가 -->
+        <div class="mypostingbox" id="postingbox">
+            <h3 class="postingbox_title">멤버 추가</h3>
+            <h6 class="how_to_post">정보를 입력하구 기록하기를 눌러주세요</h6>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="image" placeholder="본인 사진" />
+                <label for="floatingInput">본인 사진</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="name" placeholder="본인 이름" />
+                <label for="floatingInput">본인 이름</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="dicide" placeholder="각오 한마디" />
+                <label for="floatingInput">각오 한마디</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="date" placeholder="작성 날짜" />
+                <label for="floatingInput">작성 날짜</label>
+            </div>
+            <!-- 세부사항 추가 버튼 -->
+            <button onclick="open_input()" type="button" class="btn btn-secondary" id="open_btn_details"
+                style="background-color: lightgray; border: 0; margin-bottom: 10px; display: block;">▼세부 사항
+                추가하기▼</button>
+            <!-- 상세정보 작성란 -->
+            <div id=input_details style="display: none;">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="mbti" placeholder="MBTI" />
+                    <label for="floatingInput">MBTI</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="hobby" placeholder="취미" />
+                    <label for="floatingInput">취미</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="adv" placeholder="장점" />
+                    <label for="floatingInput">장점</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="blog" placeholder="블로그" />
+                    <label for="floatingInput">블로그</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="tmi" placeholder="TMI" />
+                    <label for="floatingInput">TMI</label>
+                </div>
+            </div>
+            <!-- 세부사항 닫기 버튼 -->
+            <button onclick="close_input()" type="button" class="btn btn-secondary" id="close_btn_details"
+                style="background-color: lightgray; border: 0; margin-bottom: 10px; display: none;">▲세부 사항 숨기기▲</button>
+            <button onclick="makecard()" type="button" class="btn btn-secondary">기록하기</button>
         </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="date" placeholder="작성 날짜" />
-            <label for="floatingInput">작성 날짜</label>
-        </div>
-        <button onclick="makecard()" type="button" class="btn btn-secondary">기록하기</button>
     </div>
 
-
-    <div class="mycards">
-        <div id="card" class="row row-cols-1 row-cols-md-1 g-4">
-            //1번 카드
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">이름</h5>
-                        <p class="card-text">부트캠프에 참여하는 각오한마디</p>
-                        <p class="card-text"><small class="text-body-secondary">작성 날짜</small></p>
-                    </div>
-                </div>
-                <!-- 상세정보 -->
-                <div class="details">
-                    <p>mbti</p>
-                    <p>tmi</p>
-                </div>
-            </div>
-            //2번 카드
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">이름</h5>
-                        <p class="card-text">부트캠프에 참여하는 각오한마디</p>
-                        <p class="card-text"><small class="text-body-secondary">작성 날짜</small></p>
-                    </div>
-                </div>
-                <!-- //상세정보 -->
-                <div class="details">
-                    <p>mbti</p>
-                    <p>tmi</p>
-                </div>
-            </div>
-            //3번 카드
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">이름</h5>
-                        <p class="card-text">부트캠프에 참여하는 각오한마디</p>
-                        <p class="card-text"><small class="text-body-secondary">작성 날짜</small></p>
-                    </div>
-                </div>
-                <!-- //상세정보 -->
-                <div class="details">
-                    <p>mbti</p>
-                    <p>tmi</p>
-                </div>
-            </div>
-            //4번 카드
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">이름</h5>
-                        <p class="card-text">부트캠프에 참여하는 각오한마디</p>
-                        <p class="card-text"><small class="text-body-secondary">작성 날짜</small></p>
-                    </div>
-                </div>
-                <!-- //상세정보 -->
-                <div class="details">
-                    <p>mbti</p>
-                    <p>tmi</p>
-                </div>
-            </div>
-            //5번 카드
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">이름</h5>
-                        <p class="card-text">부트캠프에 참여하는 각오한마디</p>
-                        <p class="card-text"><small class="text-body-secondary">작성 날짜</small></p>
-                    </div>
-                </div>
-                <!-- //상세정보 -->
-                <div class="details">
-                    <p>mbti</p>
-                    <p>tmi</p>
-                </div>
-            </div>
-        </div>
 </body>
 
 </html>
