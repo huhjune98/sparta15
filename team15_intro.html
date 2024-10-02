@@ -25,7 +25,7 @@
             border: 1px solid gray;
             padding: 20px;
             border-radius: 5px;
-            float : left;
+            float: left;
         }
 
         .mytitle {
@@ -46,7 +46,7 @@
         .mycards {
             width: 500px;
             margin: 200px auto 0px 15%;
-            float : left;
+            float: left;
         }
 
         .details {
@@ -59,17 +59,17 @@
         }
 
         .introduce {
-            position : relactive;
+            position: relactive;
             margin: 0px auto;
         }
 
         .nav-item {
-            color : black;
+            color: black;
         }
 
         .card_title {
-            position : relative;
-            top : 100px;
+            position: relative;
+            top: 100px;
             text-align: center;
             font-size: 40px;
 
@@ -82,10 +82,11 @@
         .postingbox_title {
             text-align: center;
         }
-      
+
         .how_to_post {
             text-align: center;
         }
+
         .title_text {
             font-size: 70px;
         }
@@ -93,27 +94,94 @@
         .card-date {
             margin-top: 70px;
         }
-
     </style>
 
     <script>
         function openclose() {
-            $('#postingbox').toggle();
+            $('.details').toggle();
         }
+
+        //세부사항 입력창 열기
+        function open_input() {
+            $('#input_details').css("display", "block");
+            $('#open_btn_details').css("display", "none");
+            $('#close_btn_details').css("display", "block");
+        }
+        //세부사항 입력창 닫기
+        function close_input() {
+            $('#input_details').css("display", "none");
+            $('#open_btn_details').css("display", "block");
+            $('#close_btn_details').css("display", "none");
+            //세부사항 닫을 때 입력값 초기화
+            $('#mbti').val("");
+            $('#hobby').val("");
+            $('#adv').val("");
+            $('#blog').val("");
+            $('#tmi').val("");
+        }
+        //카드 갯수를 세주는 변수
+        let num = 5;
         function makecard() {
+            //카드 추가
+            num = num + 1;
+            //input에서 정보 받아오기
+            let image = $('#image').val();
+            let name = $('#name').val();
+            let dicide = $('#dicide').val();
+            let date = $('#date').val();
 
+            let mbti = $('#mbti').val();
+            let hobby = $('#hobby').val();
+            let adv = $('#adv').val();
+            let blog = $('#blog').val();
+            let tmi = $('#tmi').val();
 
+            //추가할 카드 html
+            let temp_html = `
+            ▶${num}번 멤버
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="${image}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">${name}</h5>
+                            <p class="card-text">${dicide}</p>
+                            <p class="card-text card-date"><small class="text-body-secondary">${date}</small></p>
+                        </div>
+                    </div>
+                    <!-- 상세정보 -->
+                    <div class="details">
+                        <p>MBTI: ${mbti}</p>
+                        <p>취미: ${hobby}</p>
+                        <p>장점: ${adv}</p>
+                        <p>블로그: ${blog}</p>
+                        <p>TMI: ${tmi}</p>
+                    </div>
+                </div>
+            </div>`;
+            $('.mycards').append(temp_html);
             alert('15조의 팀원이 되신것을 환영합니다!');
-        }
 
+            //입력값 초기화
+            $('#image').val("");
+            $('#name').val("");
+            $('#dicide').val("");
+            $('#date').val("");
+            $('#mbti').val("");
+            $('#hobby').val("");
+            $('#adv').val("");
+            $('#blog').val("");
+            $('#tmi').val("");
+        }
     </script>
 </head>
 
 <body>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/"
-                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
@@ -136,11 +204,12 @@
     <div class="introduce">
         <h2 class="card_title">멤버 소개</h2>
         <div class="mycards">
-            //1번카드
+            ▶1번 멤버
             <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
+                <div class="row g-0" onclick=openclose()>
                     <div class="col-md-4">
-                        <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fa676324e-0492-491d-8835-cb8c3809f5f7%2F%25E1%2584%258B%25E1%2585%25B5%25E1%2584%2589%25E1%2585%25A5%25E1%2584%258C%25E1%2585%25AE%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-8004-816f-ff268b801bf6&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=830&userId=&cache=v2" class="img-fluid rounded-start" alt="...">
+                        <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fa676324e-0492-491d-8835-cb8c3809f5f7%2F%25E1%2584%258B%25E1%2585%25B5%25E1%2584%2589%25E1%2585%25A5%25E1%2584%258C%25E1%2585%25AE%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-8004-816f-ff268b801bf6&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=830&userId=&cache=v2"
+                            class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -155,15 +224,16 @@
                         <p>취미: 산책, 운동</p>
                         <p>장점: 성실합니다</p>
                         <p>블로그: https://infobox4367.tistory.com</p>
-                        <p>TMI: </p>
+                        <p>TMI: 열심히 다이어트 중!</p>
                     </div>
                 </div>
             </div>
-            //2번카드
+            ▶2번 멤버
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fef4967d9-41f8-43e4-94a6-47f3223b327b%2F%25E1%2584%2592%25E1%2585%25A5%25E1%2584%258C%25E1%2585%25AE%25E1%2586%25AB.png?table=block&id=113f89f7-984e-8008-82f4-ef26e17f1522&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2" class="img-fluid rounded-start" alt="...">
+                        <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fef4967d9-41f8-43e4-94a6-47f3223b327b%2F%25E1%2584%2592%25E1%2585%25A5%25E1%2584%258C%25E1%2585%25AE%25E1%2586%25AB.png?table=block&id=113f89f7-984e-8008-82f4-ef26e17f1522&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
+                            class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -183,11 +253,12 @@
                     </div>
                 </div>
             </div>
-            //3번카드
+            ▶3번 멤버
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2F7087b6a6-8972-421c-b6f3-255b4c346748%2F%25E1%2584%2587%25E1%2585%25B5%25E1%2586%25BE%25E1%2584%2582%25E1%2585%25A1.jpg?table=block&id=113f89f7-984e-80b6-adaf-fc2aa12a4abb&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2" class="img-fluid rounded-start" alt="...">
+                        <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2F7087b6a6-8972-421c-b6f3-255b4c346748%2F%25E1%2584%2587%25E1%2585%25B5%25E1%2586%25BE%25E1%2584%2582%25E1%2585%25A1.jpg?table=block&id=113f89f7-984e-80b6-adaf-fc2aa12a4abb&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
+                            class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -206,17 +277,19 @@
                     </div>
                 </div>
             </div>
-            //4번카드
+            ▶4번 멤버
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2F284a4896-5854-4aed-9a82-1ccd01530152%2F%25E1%2584%258C%25E1%2585%25A9%25E1%2584%2589%25E1%2585%25A5%25E1%2586%25BC%25E1%2584%2586%25E1%2585%25B5%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-80fb-9b87-fa08ab20f3a1&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2" class="img-fluid rounded-start" alt="...">
+                        <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2F284a4896-5854-4aed-9a82-1ccd01530152%2F%25E1%2584%258C%25E1%2585%25A9%25E1%2584%2589%25E1%2585%25A5%25E1%2586%25BC%25E1%2584%2586%25E1%2585%25B5%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-80fb-9b87-fa08ab20f3a1&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
+                            class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">조성민</h5>
                             <p class="card-text">함께 열심히 해봐요!</p>
-                            <p class="card-text card-date" card-date><small class="text-body-secondary">2024.10.01</small></p>
+                            <p class="card-text card-date" card-date><small
+                                    class="text-body-secondary">2024.10.01</small></p>
                         </div>
                     </div>
                     <!-- 상세정보 -->
@@ -225,16 +298,17 @@
                         <p>취미:게임, 여행</p>
                         <p>좋아하는것: 게임 </p>
                         <p>장점: 끈기</p>
-                        <p>블로그: https://tjdals9709.tistory.com/</p> 
+                        <p>블로그: https://tjdals9709.tistory.com/</p>
                         <p>TMI: MBTI가 매번 바뀝니다</p>
                     </div>
                 </div>
             </div>
-            //5번카드
+            ▶5번 멤버
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fd8e2380e-afa7-43ea-8a83-3fcfa6311da9%2F%25E1%2584%258C%25E1%2585%25A1%25E1%2586%25BC%25E1%2584%2589%25E1%2585%25AE%25E1%2584%258B%25E1%2585%25A7%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-807b-8fbf-ec897f9229f8&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2" class="img-fluid rounded-start" alt="...">
+                        <img src="https://mica-protest-4a1.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F64a6ad6d-60f7-4ff2-8e63-9b76380ede04%2Fd8e2380e-afa7-43ea-8a83-3fcfa6311da9%2F%25E1%2584%258C%25E1%2585%25A1%25E1%2586%25BC%25E1%2584%2589%25E1%2585%25AE%25E1%2584%258B%25E1%2585%25A7%25E1%2586%25AB.jpg?table=block&id=113f89f7-984e-807b-8fbf-ec897f9229f8&spaceId=64a6ad6d-60f7-4ff2-8e63-9b76380ede04&width=1420&userId=&cache=v2"
+                            class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -255,13 +329,18 @@
                 </div>
             </div>
         </div>
-    
+
+        <!-- 멤버추가 -->
         <div class="mypostingbox" id="postingbox">
             <h3 class="postingbox_title">멤버 추가</h3>
             <h6 class="how_to_post">정보를 입력하구 기록하기를 눌러주세요</h6>
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="image" placeholder="본인 사진" />
                 <label for="floatingInput">본인 사진</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="name" placeholder="본인 이름" />
+                <label for="floatingInput">본인 이름</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="dicide" placeholder="각오 한마디" />
@@ -271,9 +350,40 @@
                 <input type="email" class="form-control" id="date" placeholder="작성 날짜" />
                 <label for="floatingInput">작성 날짜</label>
             </div>
+            <!-- 세부사항 추가 버튼 -->
+            <button onclick="open_input()" type="button" class="btn btn-secondary" id="open_btn_details"
+                style="background-color: lightgray; border: 0; margin-bottom: 10px; display: block;">▼세부 사항
+                추가하기▼</button>
+            <!-- 상세정보 작성란 -->
+            <div id=input_details style="display: none;">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="mbti" placeholder="MBTI" />
+                    <label for="floatingInput">MBTI</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="hobby" placeholder="취미" />
+                    <label for="floatingInput">취미</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="adv" placeholder="장점" />
+                    <label for="floatingInput">장점</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="blog" placeholder="블로그" />
+                    <label for="floatingInput">블로그</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="tmi" placeholder="TMI" />
+                    <label for="floatingInput">TMI</label>
+                </div>
+            </div>
+            <!-- 세부사항 닫기 버튼 -->
+            <button onclick="close_input()" type="button" class="btn btn-secondary" id="close_btn_details"
+                style="background-color: lightgray; border: 0; margin-bottom: 10px; display: none;">▲세부 사항 숨기기▲</button>
             <button onclick="makecard()" type="button" class="btn btn-secondary">기록하기</button>
         </div>
     </div>
 
 </body>
+
 </html>
